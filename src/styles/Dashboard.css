@@ -1,0 +1,63 @@
+/* src/styles/Dashboard.css */
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Contenedor principal de Dashboard */
+.dashboard-container {
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+}
+
+/* Contenido principal */
+.content {
+    margin-top: 60px; /* Ajusta para el header */
+    padding: 40px;
+    background-color: #f4f7fa;
+    flex: 1;
+    transition: margin-left 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.content.with-sidebar {
+    margin-left: 250px; /* Ajusta para el sidebar */
+}
+
+.content h2 {
+    color: #00bcd4;
+    font-size: 24px;
+}
+
+/* Estilos para el perfil de usuario en la página de bienvenida */
+.user-profile {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.user-profile img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    border: 2px solid #00bcd4;
+}
+
+.user-profile h3 {
+    color: #00bcd4;
+    margin: 0;
+    font-size: 20px;
+}
+
+.user-profile p {
+    color: #555;
+    font-size: 16px;
+    margin-top: 5px;
+}
