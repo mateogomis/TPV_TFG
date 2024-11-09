@@ -25,6 +25,22 @@ body {
     background-color: #e0f7fa; /* Un cian clarito al pasar el mouse */
 }
 
+/* Estilo para el logo */
+.logo-container {
+    margin-bottom: 30px;  /* Espacio entre el logo y el formulario */
+    transition: transform 0.3s ease; /* Movimiento suave al pasar el mouse */
+}
+
+.logo {
+    width: 160px;  /* Aumenta el tamaño del logo a 160px */
+    height: auto;   /* Mantiene la proporción */
+    transition: transform 0.3s ease; /* Efecto de movimiento en el logo */
+}
+
+.logo:hover {
+    transform: scale(1.1); /* Aumenta el tamaño del logo al pasar el mouse */
+}
+
 .login-container h2 {
     color: #00bcd4;
     margin-bottom: 20px;
@@ -37,6 +53,12 @@ body {
     border: 1px solid #ddd;
     border-radius: 4px;
     box-sizing: border-box;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Agregar transición al borde y sombra */
+}
+
+.login-container input:hover {
+    border-color: #00bcd4;  /* Cambia el borde a azul claro */
+    box-shadow: 0 0 5px rgba(0, 188, 212, 0.5); /* Añade sombra cuando pasa el mouse */
 }
 
 .login-container button {
@@ -49,10 +71,12 @@ body {
     cursor: pointer;
     font-size: 16px;
     font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Agregar transición al fondo y movimiento */
 }
 
 .login-container button:hover {
     background-color: #0097a7;
+    transform: translateY(-3px); /* Desplazamiento hacia arriba al pasar el mouse */
 }
 
 .login-container p {

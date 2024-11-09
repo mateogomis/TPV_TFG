@@ -1,0 +1,115 @@
+.configuracion-container {
+    padding: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+h2 {
+    text-align: center;
+    color: #00bcd4;
+    margin-bottom: 30px;
+}
+
+.config-sections {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.config-section {
+    flex: 1;
+    margin-bottom: 30px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease; /* Agregado el color de fondo en la transición */
+}
+
+.config-section:hover {
+    transform: translateY(-5px); /* Efecto de desplazamiento hacia arriba */
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1); /* Sombra más pronunciada */
+    background-color: #e0f7fa; /* Cambia el color de fondo al hacer hover */
+}
+
+.config-section h3 {
+    color: #0097a7;
+    margin-bottom: 15px;
+}
+
+.config-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    flex-grow: 1; /* Permite que el formulario crezca y ocupe el espacio disponible */
+}
+
+.config-form input {
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    width: 100%;
+    max-width: 350px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease, background-color 0.3s ease; /* Agregar transición para fondo y borde */
+}
+
+.config-form input:hover {
+    border-color: #00bcd4; /* Cambia el borde del input cuando pasa el cursor */
+    background-color: #f0f8ff; /* Cambia el fondo del input */
+}
+
+.config-form button {
+    padding: 12px;
+    background-color: #00bcd4;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+    max-width: 350px;
+    margin: 0 auto;
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Transición suave para el fondo y efecto de escala */
+}
+
+.config-form button:hover {
+    background-color: #0097a7; /* Cambio de color en hover */
+    transform: scale(1.05);  /* Efecto de escala para el botón */
+}
+
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 20px;
+}
+
+/* Cambiar color de los íconos SVG */
+.bi {
+    fill: #00bcd4;
+}
+
+.bi:hover {
+    fill: #0097a7;
+}
+
+.section-header svg {
+    margin-right: 10px;
+    transition: fill 0.3s ease;
+    margin-bottom: 10px;
+}
+
+/* Alinear los botones al final */
+.config-form button {
+    margin-top: auto; /* Esto empuja los botones al final */
+}
+
+/* Hover en el contenedor de los botones */
+.config-form button:hover {
+    transform: scale(1.05);  /* Un pequeño efecto de escala al hacer hover */
+}

@@ -1,5 +1,3 @@
-// src/components/Login.js
-
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -29,7 +27,10 @@ function Login() {
 
     return (
         <div className="login-container">
-            <h2>🎉 ¡Bienvenido! 🎉</h2>
+            {/* Reemplazar el título por la imagen del logo */}
+            <div className="logo-container">
+                <img src="/logo512.png" alt="Logo" className="logo" /> {/* Logo en el login */}
+            </div>
             <form onSubmit={handleLogin}>
                 <input
                     type="text"
