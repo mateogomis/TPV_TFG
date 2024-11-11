@@ -244,3 +244,21 @@ body {
 .sidebar-logo:hover {
     transform: scale(1.1);           /* Agranda el logo al pasar el ratón */
 }
+.logout-button {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    margin-left: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.logout-button svg {
+    fill: white;
+    transition: fill 0.3s ease;
+}
+
+.logout-button svg:hover {
+    fill: #007c91; /* Tono más oscuro al hacer hover */
+}
