@@ -1,0 +1,70 @@
+/* src/styles/Compras.css */
+
+.compras-container {
+    padding: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.compras-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.compras-form input,
+.compras-form button {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.compras-form button {
+    background-color: #00bcd4;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.compras-form button:hover {
+    background-color: #0097a7;
+}
+
+.compras-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.compras-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.compras-item .producto-info {
+    flex: 1;
+}
+
+.compras-item .producto-actions button {
+    margin-left: 10px;
+    padding: 5px 10px;
+    background-color: #4caf50; /* Verde para editar y eliminar */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+/* Hover verde para los botones */
+.compras-item .producto-actions button:hover {
+    background-color: #45a049; /* Verde más oscuro al pasar el mouse */
+}

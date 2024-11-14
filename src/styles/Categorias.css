@@ -1,0 +1,71 @@
+/* src/styles/Categorias.css */
+
+.categorias-container {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.categoria-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.categoria-form input,
+.categoria-form textarea {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+/* Botón de crear con color cian */
+.categoria-form button.create-button {
+    padding: 10px;
+    font-size: 16px;
+    background-color: #00bcd4; /* Color cian para el botón de crear */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.categoria-form button.create-button:hover {
+    background-color: #0097a7; /* Color cian más oscuro al pasar el mouse */
+}
+
+.categoria-list {
+    list-style: none;
+    padding: 0;
+}
+
+.categoria-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    background-color: #f9f9f9;
+}
+
+/* Botones de acciones con color verde */
+.categoria-actions button {
+    margin-left: 10px;
+    padding: 5px 10px;
+    font-size: 14px;
+    background-color: #4CAF50; /* Color verde para los botones de acciones */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.categoria-actions button:hover {
+    background-color: #45a049; /* Color verde más oscuro al pasar el mouse */
+}

@@ -1,0 +1,246 @@
+/* src/styles/Layout.css */
+
+/* Reset general */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Contenedor del Layout */
+.dashboard-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Header */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background-color: #00bcd4;
+    color: white;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    box-sizing: border-box;
+    z-index: 1000; /* Asegura que el header esté siempre encima */
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 20px;
+    flex: 1;
+    text-align: center;
+}
+
+.hamburger {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.home-button svg {
+    fill: white;
+    cursor: pointer;
+    transition: fill 0.2s ease;
+}
+
+.home-button svg:hover {
+    fill: #007c91;
+}
+
+/* Sidebar */
+.sidebar {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    width: 250px;
+    height: calc(100% - 110px); /* Resta el espacio de header y footer */
+    background-color: #00bcd4;
+    color: white;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    z-index: 900;
+}
+
+.sidebar.open {
+    transform: translateX(0);
+}
+
+.sidebar-title {
+    color: white;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    font-size: 24px;
+    transition: transform 0.3s ease; /* Efecto de movimiento */
+}
+
+.sidebar-title svg {
+    margin-left: 8px;
+    fill: white;
+}
+
+/* Hover en el texto "Administración" */
+.sidebar-title:hover {
+    transform: scale(1.1); /* Agranda el texto al pasar el mouse */
+}
+
+/* Estilo para los enlaces del menú */
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+}
+
+.sidebar li {
+    padding: 15px;
+    cursor: pointer;
+    font-size: 18px;
+    text-align: center;
+    border-radius: 5px;
+    margin: 5px 0;
+    transition: background-color 0.3s;
+    border: none; /* Asegura que no haya borde en los elementos de lista */
+}
+
+.sidebar li:hover {
+    background-color: #0097a7;
+    border: none; /* Sin borde en hover */
+}
+
+.sidebar a {
+    text-decoration: none;
+    color: white;
+    display: block;
+    width: 100%;
+}
+
+/* Contenido principal */
+.content {
+    flex: 1;
+    margin-top: 60px;
+    margin-bottom: 50px; /* Espacio para el footer */
+    padding: 40px;
+    background-color: #f4f7fa;
+    transition: margin-left 0.3s ease;
+    text-align: center;
+}
+
+.content.with-sidebar {
+    margin-left: 250px;
+}
+
+.content h2 {
+    color: #00bcd4;
+    font-size: 24px;
+}
+
+/* Footer */
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    background-color: #00bcd4;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    box-sizing: border-box;
+    z-index: 1000;
+}
+
+.footer-links {
+    display: flex;
+    gap: 20px;
+}
+
+.footer-link {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    transition: color 0.3s;
+}
+
+.footer-link:hover {
+    color: #b0e0e6;
+}
+
+/* Logo en el Header */
+.logo-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    margin-top: 30px; /* Agregar margen superior */
+}
+
+.logo {
+    width: 80px;  /* Ajusta el tamaño del logo */
+    height: auto;
+    transition: transform 0.3s ease; /* Efecto de movimiento */
+}
+
+.logo:hover {
+    transform: scale(1.1); /* Aumenta el tamaño del logo al pasar el mouse */
+}
+
+/* Logo en el Sidebar */
+.sidebar-logo-container {
+    margin-top: 20px;  /* Ajusta esto si es necesario */
+    margin-left: 125px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%; /* Fuerza el contenedor a ocupar todo el ancho disponible */
+    height: 100%; /* Asegura que ocupe todo el alto disponible */
+}
+
+/* Logo en el Sidebar */
+.sidebar-logo-container {
+    display: flex;                    /* Forzamos el uso de Flexbox */
+    justify-content: center;          /* Centra el contenido horizontalmente */
+    align-items: center;              /* Centra el contenido verticalmente */
+    width: 100%;                      /* Forzamos que ocupe todo el ancho disponible */
+    height: 100%;                     /* Forzamos que ocupe todo el alto disponible */
+    margin-top: 20px;                 /* Ajustamos el margen superior */
+}
+
+/* Hacer que el logo clickeable */
+.sidebar-logo-container a {
+    display: flex;                    /* Usamos Flexbox dentro del enlace */
+    justify-content: center;          /* Centra el contenido horizontalmente */
+    align-items: center;              /* Centra el contenido verticalmente */
+    width: 100%;                      /* Hace que el enlace ocupe todo el espacio */
+    height: 100%;                     /* Asegura que el enlace ocupe todo el alto */
+    text-align: center;               /* Centra el texto si hay */
+    cursor: pointer;                 /* Cambia el cursor al pasar sobre el logo */
+}
+
+/* Estilo para el logo */
+.sidebar-logo {
+    width: 120px;                    /* Ajusta el tamaño del logo */
+    height: auto;                    /* Mantiene la proporción */
+    transition: transform 0.3s ease;  /* Efecto de movimiento */
+}
+
+/* Hover para el logo */
+.sidebar-logo:hover {
+    transform: scale(1.1);           /* Agranda el logo al pasar el ratón */
+}
