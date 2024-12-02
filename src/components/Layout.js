@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../styles/Layout.css';
 
 function Layout({ children }) {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const [userData, setUserData] = useState({});
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchUserData = async () => {
@@ -24,24 +25,37 @@ function Layout({ children }) {
         setIsSidebarOpen(!isSidebarOpen);
     };
 
+    const handleLogout = () => {
+        if (window.confirm("¿Seguro que quieres cerrar sesión?")) {
+            localStorage.removeItem('authToken');
+            navigate('/login');
+        }
+    };
+
     return (
         <div className="dashboard-container">
-            {/* Header */}
             <header className="header">
                 <button className="hamburger" onClick={toggleSidebar}>
                     ☰
                 </button>
                 <div className="logo-container">
-                    <img src="/logo512.png" alt="Logo" className="logo" /> {/* Logo en el header */}
+                    <img src="/logo512.png" alt="Logo" className="logo" />
                 </div>
-                <Link to="/dashboard" className="home-button">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-house" viewBox="0 0 16 16">
-                        <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5z"/>
-                    </svg>
-                </Link>
+                <div className="header-buttons">
+                    <Link to="/dashboard" className="home-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-house" viewBox="0 0 16 16">
+                            <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5z"/>
+                        </svg>
+                    </Link>
+                    <button onClick={handleLogout} className="logout-button" title="Cerrar sesión">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-box-arrow-in-left" viewBox="0 0 16 16">
+                            <path fillRule="evenodd" d="M10 3.5a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 1 1 0v2A1.5 1.5 0 0 1 9.5 14h-8A1.5 1.5 0 0 1 0 12.5v-9A1.5 1.5 0 0 1 1.5 2h8A1.5 1.5 0 0 1 11 3.5v2a.5.5 0 0 1-1 0z"/>
+                            <path fillRule="evenodd" d="M4.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H14.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708z"/>
+                        </svg>
+                    </button>
+                </div>
             </header>
 
-            {/* Sidebar */}
             <div className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
                 <h2 className="sidebar-title">
                     Administración
@@ -51,25 +65,26 @@ function Layout({ children }) {
                 </h2>
 
                 <ul>
+                    <li><Link to="/pedidos">Pedidos</Link></li>
                     <li><Link to="/categorias">Categorías</Link></li>
                     <li><Link to="/productos">Productos</Link></li>
-                    <li><Link to="/compras">Compras</Link></li>
+                    {/* <li><Link to="/compras">Compras</Link></li> */}
                     <li><Link to="/clientes">Clientes</Link></li>
-                    <li><Link to="/configuracion">Configuración</Link></li>
+                    <li><Link to="/ventas">Ventas</Link></li>
+                    {/* <li><Link to="/configuracion">Configuración</Link></li> */}
+                    
+
                 </ul>
 
-                {/* Logo debajo de Configuración, linkeado al Dashboard */}
                 <Link to="/dashboard" className="sidebar-logo-container">
                     <img src="/logo512.png" alt="Logo" className="sidebar-logo" />
                 </Link>
             </div>
 
-            {/* Contenido Principal */}
             <div className={`content ${isSidebarOpen ? 'with-sidebar' : ''}`}>
                 {children}
             </div>
 
-            {/* Footer */}
             <footer className="footer">
                 <div className="footer-links">
                     <a href="mailto:contacto@empresa.com?subject=Consulta desde Panel Central" className="footer-link">Contáctanos</a>

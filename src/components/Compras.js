@@ -1,5 +1,3 @@
-// src/components/Compras.js
-
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../styles/Compras.css';
@@ -10,7 +8,15 @@ function Compras() {
     const [cantidad, setCantidad] = useState('');
     const [editandoCompraId, setEditandoCompraId] = useState(null);
 
-    // Obtener todas las compras
+    // Obtener el token CSRF de las cookies
+    const getCSRFToken = () => {
+        const cookieValue = document.cookie
+            .split('; ')
+            .find(row => row.startsWith('csrftoken='))
+            ?.split('=')[1];
+        return cookieValue || '';
+    };
+
     useEffect(() => {
         fetchCompras();
     }, []);
@@ -18,13 +24,12 @@ function Compras() {
     const fetchCompras = async () => {
         try {
             const token = localStorage.getItem('authToken');
-            if (!token) {
-                console.error("No token found.");
-                return;
-            }
+            const csrfToken = getCSRFToken();
             const response = await axios.get('http://127.0.0.1:8000/api/compras/', {
+                withCredentials: true,
                 headers: {
                     Authorization: `Bearer ${token}`,
+                    'X-CSRFToken': csrfToken,
                 },
             });
             setCompras(response.data);
@@ -36,19 +41,19 @@ function Compras() {
     const crearCompra = async () => {
         try {
             const token = localStorage.getItem('authToken');
-            if (!token) {
-                console.error("No token found.");
-                return;
-            }
-            const response = await axios.post('http://127.0.0.1:8000/api/compras/', {
-                producto: productoId,
-                cantidad,
-            }, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            });
-            fetchCompras();  // Recargar las compras
+            const csrfToken = getCSRFToken();
+            await axios.post(
+                'http://127.0.0.1:8000/api/compras/',
+                { producto_id: productoId, cantidad },
+                {
+                    withCredentials: true,
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                        'X-CSRFToken': csrfToken,
+                    },
+                }
+            );
+            fetchCompras();
             setProductoId('');
             setCantidad('');
         } catch (error) {
@@ -59,19 +64,19 @@ function Compras() {
     const editarCompra = async () => {
         try {
             const token = localStorage.getItem('authToken');
-            if (!token) {
-                console.error("No token found.");
-                return;
-            }
-            await axios.put(`http://127.0.0.1:8000/api/compras/${editandoCompraId}/`, {
-                producto: productoId,
-                cantidad,
-            }, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            });
-            fetchCompras();  // Recargar las compras
+            const csrfToken = getCSRFToken();
+            await axios.put(
+                `http://127.0.0.1:8000/api/compras/${editandoCompraId}/`,
+                { producto_id: productoId, cantidad },
+                {
+                    withCredentials: true,
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                        'X-CSRFToken': csrfToken,
+                    },
+                }
+            );
+            fetchCompras();
             setProductoId('');
             setCantidad('');
             setEditandoCompraId(null);
@@ -83,16 +88,15 @@ function Compras() {
     const eliminarCompra = async (id) => {
         try {
             const token = localStorage.getItem('authToken');
-            if (!token) {
-                console.error("No token found.");
-                return;
-            }
+            const csrfToken = getCSRFToken();
             await axios.delete(`http://127.0.0.1:8000/api/compras/${id}/`, {
+                withCredentials: true,
                 headers: {
                     Authorization: `Bearer ${token}`,
+                    'X-CSRFToken': csrfToken,
                 },
             });
-            fetchCompras();  // Recargar las compras
+            fetchCompras();
         } catch (error) {
             console.error('Error al eliminar la compra', error);
         }
@@ -101,7 +105,6 @@ function Compras() {
     return (
         <div className="compras-container">
             <h2>Compras</h2>
-
             <div className="compras-form">
                 <input
                     type="text"

@@ -1,24 +1,25 @@
-// src/App.js
-
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Login from './components/Login';
 import Dashboard from './components/Dashboard';
 import Categorias from './components/Categorias';
 import PrivateRoute from './components/PrivateRoute';
-import Productos from './components/Productos'; 
-import Compras from './components/Compras';  // Importa el componente de Compras
-import Clientes from './components/Clientes';  // Importa el componente de Clientes
-import Configuracion from './components/Configuracion';  // Importa el componente de Configuración
-import Layout from './components/Layout'; // Importa el nuevo Layout
+import Productos from './components/Productos';
+import Compras from './components/Compras';
+import Clientes from './components/Clientes';
+import Configuracion from './components/Configuracion';
+import Layout from './components/Layout';
+import Pedidos from './components/Pedidos';
+import Ventas from './components/Ventas';
 
 function App() {
     return (
         <Router>
             <Routes>
+                {/* Ruta pública para el login */}
                 <Route path="/login" element={<Login />} />
-                
-                {/* Ruta protegida con Layout */}
+
+                {/* Rutas protegidas bajo Layout */}
                 <Route 
                     path="/dashboard" 
                     element={
@@ -29,7 +30,29 @@ function App() {
                         </PrivateRoute>
                     } 
                 />
-                
+
+                <Route 
+                    path="/pedidos" 
+                    element={
+                        <PrivateRoute>
+                            <Layout>
+                                <Pedidos />
+                            </Layout>
+                        </PrivateRoute>
+                    } 
+                    
+                />
+                <Route
+                     path="/ventas"
+                     element={
+                         <PrivateRoute>
+                            <Layout>
+                                <Ventas />
+                            </Layout>
+                        </PrivateRoute>
+                     }
+                />
+
                 <Route 
                     path="/categorias" 
                     element={
@@ -40,6 +63,7 @@ function App() {
                         </PrivateRoute>
                     } 
                 />
+
                 <Route 
                     path="/productos" 
                     element={
@@ -50,8 +74,9 @@ function App() {
                         </PrivateRoute>
                     } 
                 />
+
                 <Route 
-                    path="/compras"  // Añadir la ruta para Compras
+                    path="/compras" 
                     element={
                         <PrivateRoute>
                             <Layout>
@@ -60,8 +85,9 @@ function App() {
                         </PrivateRoute>
                     } 
                 />
+
                 <Route 
-                    path="/clientes"  // Añadir la ruta para Clientes
+                    path="/clientes" 
                     element={
                         <PrivateRoute>
                             <Layout>
@@ -70,8 +96,9 @@ function App() {
                         </PrivateRoute>
                     } 
                 />
+
                 <Route 
-                    path="/configuracion"  // Añadir la ruta para Configuración
+                    path="/configuracion" 
                     element={
                         <PrivateRoute>
                             <Layout>
@@ -81,7 +108,7 @@ function App() {
                     } 
                 />
 
-                {/* Ruta por defecto */}
+                {/* Ruta por defecto para redirigir al login si no coincide ninguna ruta */}
                 <Route path="*" element={<Navigate to="/login" />} />
             </Routes>
         </Router>

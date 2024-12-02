@@ -8,11 +8,14 @@ function Productos() {
     const [descripcion, setDescripcion] = useState('');
     const [precio, setPrecio] = useState('');
     const [stock, setStock] = useState('');
+    const [imagen, setImagen] = useState(null);
     const [editandoProductoId, setEditandoProductoId] = useState(null);
 
-    // Obtener el token CSRF de las cookies
     const getCSRFToken = () => {
-        const cookieValue = document.cookie.match('(^|;)\\s*' + 'csrftoken' + '\\s*=\\s*([^;]+)')?.pop();
+        const cookieValue = document.cookie
+            .split('; ')
+            .find(row => row.startsWith('csrftoken='))
+            ?.split('=')[1];
         return cookieValue || '';
     };
 
@@ -28,8 +31,8 @@ function Productos() {
                 withCredentials: true,
                 headers: {
                     Authorization: `Bearer ${token}`,
-                    'X-CSRFToken': csrfToken
-                }
+                    'X-CSRFToken': csrfToken,
+                },
             });
             setProductos(response.data);
         } catch (error) {
@@ -37,25 +40,37 @@ function Productos() {
         }
     };
 
+    const handleImageChange = (e) => {
+        setImagen(e.target.files[0]);
+    };
+
     const crearProducto = async () => {
         try {
             const token = localStorage.getItem('authToken');
             const csrfToken = getCSRFToken();
-            await axios.post(
-                'http://127.0.0.1:8000/api/productos/',
-                { nombre, descripcion, precio, stock },
-                {
-                    withCredentials: true,
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                        'X-CSRFToken': csrfToken
-                    }
-                }
-            );
+
+            const formData = new FormData();
+            formData.append('nombre', nombre);
+            formData.append('descripcion', descripcion);
+            formData.append('precio', precio);
+            formData.append('stock', stock);
+            if (imagen) {
+                formData.append('imagen', imagen);
+            }
+
+            await axios.post('http://127.0.0.1:8000/api/productos/', formData, {
+                withCredentials: true,
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'X-CSRFToken': csrfToken,
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
             setNombre('');
             setDescripcion('');
             setPrecio('');
             setStock('');
+            setImagen(null);
             fetchProductos();
         } catch (error) {
             console.error('Error al crear el producto:', error);
@@ -66,22 +81,30 @@ function Productos() {
         try {
             const token = localStorage.getItem('authToken');
             const csrfToken = getCSRFToken();
-            await axios.put(
-                `http://127.0.0.1:8000/api/productos/${id}/`,
-                { nombre, descripcion, precio, stock },
-                {
-                    withCredentials: true,
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                        'X-CSRFToken': csrfToken
-                    }
-                }
-            );
+
+            const formData = new FormData();
+            formData.append('nombre', nombre);
+            formData.append('descripcion', descripcion);
+            formData.append('precio', precio);
+            formData.append('stock', stock);
+            if (imagen) {
+                formData.append('imagen', imagen);
+            }
+
+            await axios.put(`http://127.0.0.1:8000/api/productos/${id}/`, formData, {
+                withCredentials: true,
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'X-CSRFToken': csrfToken,
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
             setEditandoProductoId(null);
             setNombre('');
             setDescripcion('');
             setPrecio('');
             setStock('');
+            setImagen(null);
             fetchProductos();
         } catch (error) {
             console.error('Error al editar el producto:', error);
@@ -96,8 +119,8 @@ function Productos() {
                 withCredentials: true,
                 headers: {
                     Authorization: `Bearer ${token}`,
-                    'X-CSRFToken': csrfToken
-                }
+                    'X-CSRFToken': csrfToken,
+                },
             });
             fetchProductos();
         } catch (error) {
@@ -132,6 +155,7 @@ function Productos() {
                     value={stock}
                     onChange={(e) => setStock(e.target.value)}
                 />
+                <input type="file" onChange={handleImageChange} />
                 {editandoProductoId ? (
                     <button onClick={() => editarProducto(editandoProductoId)}>Actualizar</button>
                 ) : (
@@ -146,6 +170,9 @@ function Productos() {
                             <p>{producto.descripcion}</p>
                             <p>Precio: ${producto.precio}</p>
                             <p>Stock: {producto.stock}</p>
+                            {producto.imagen && (
+                                <img src={producto.imagen} alt={producto.nombre} className="producto-img" />
+                            )}
                         </div>
                         <div className="producto-actions">
                             <button

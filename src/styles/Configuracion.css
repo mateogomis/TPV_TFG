@@ -32,7 +32,7 @@ h2 {
 .config-section:hover {
     transform: translateY(-5px); /* Efecto de desplazamiento hacia arriba */
     box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1); /* Sombra más pronunciada */
-    background-color: #e0f7fa; /* Cambia el color de fondo al hacer hover */
+    background-color: #24ddf55d; /* Cambia el color de fondo al hacer hover */
 }
 
 .config-section h3 {

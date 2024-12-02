@@ -58,6 +58,28 @@ body {
 .home-button svg:hover {
     fill: #007c91;
 }
+/* Botón de logout sin fondo */
+.logout-button {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Estilos del ícono en el botón de logout */
+.logout-button svg {
+    fill: white;
+    cursor: pointer;
+    transition: fill 0.2s ease;
+    margin-left: 16px; /* Ajusta el espacio entre los iconos */
+}
+
+.logout-button svg:hover {
+    fill: #007c91;
+}
+
+
+
 
 /* Sidebar */
 .sidebar {
