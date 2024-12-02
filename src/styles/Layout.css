@@ -151,6 +151,12 @@ body {
     display: block;
     width: 100%;
 }
+@media (max-width: 768px) {
+    /* Mostrar el botón de hamburguesa en dispositivos pequeños */
+    .sidebar.open {
+        display: block;
+    } 
+}
 
 /* Contenido principal */
 .content {

@@ -1,16 +1,93 @@
 .ventas-container {
-    padding: 20px;
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    font-family: 'Arial', sans-serif;
+    background-color: #eef4fc;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    text-align: center;
+    color: #0056b3;
+    font-size: 2em;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding-bottom: 10px;
+    display: inline-block;
 }
 
 .ventas-list {
-    list-style: none;
+    display: flex;
+    flex-wrap: wrap; /* Permite que las tarjetas pasen a la siguiente fila si no hay espacio */
+    justify-content: space-between; /* Espaciado uniforme entre las tarjetas */
+    gap: 20px; /* Espacio entre filas */
     padding: 0;
+    list-style: none;
+    margin: 0;
 }
 
 .venta-item {
-    margin-bottom: 20px;
-    padding: 15px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    background-color: #f9f9f9;
+    flex: 1 1 calc(25% - 20px); /* Cada tarjeta ocupa el 25% del ancho menos el espacio entre tarjetas */
+    max-width: calc(25% - 20px); /* Asegura que no se expandan más del 25% */
+    padding: 20px;
+    border: 1px solid #cfd8e3;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #ffffff, #f2f6fc);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+    position: relative;
+}
+
+.venta-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.venta-item h3 {
+    margin: 0;
+    font-size: 1.5em;
+    color: #333333;
+    font-weight: 600;
+}
+
+.venta-item p {
+    margin: 8px 0;
+    color: #555555;
+    font-size: 1.1em;
+}
+
+.venta-item p span {
+    font-weight: bold;
+    color: #0056b3;
+}
+
+.venta-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: #0056b3;
+    border-radius: 10px 10px 0 0;
+}
+
+/* Efectos responsive */
+@media (max-width: 1024px) {
+    .venta-item {
+        flex: 1 1 calc(50% - 20px); /* Cambia a 2 columnas en pantallas medianas */
+        max-width: calc(50% - 20px);
+    }
+}
+
+@media (max-width: 768px) {
+    .venta-item {
+        flex: 1 1 calc(100% - 20px); /* Cada tarjeta ocupa el 100% del ancho en pantallas pequeñas */
+        max-width: calc(100% - 20px);
+    }
 }
