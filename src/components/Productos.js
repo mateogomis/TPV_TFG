@@ -10,6 +10,7 @@ function Productos() {
     const [stock, setStock] = useState('');
     const [imagen, setImagen] = useState(null);
     const [editandoProductoId, setEditandoProductoId] = useState(null);
+    const [errors, setErrors] = useState({}); // Estado para manejar errores de validación
 
     const getCSRFToken = () => {
         const cookieValue = document.cookie
@@ -44,7 +45,19 @@ function Productos() {
         setImagen(e.target.files[0]);
     };
 
+    const validateFields = () => {
+        const newErrors = {};
+        if (!nombre.trim()) newErrors.nombre = 'El nombre es obligatorio.';
+        if (nombre.length > 100) newErrors.nombre = 'El nombre no puede exceder 100 caracteres.';
+        if (!descripcion.trim()) newErrors.descripcion = 'La descripción es obligatoria.';
+        if (!precio || parseFloat(precio) <= 0) newErrors.precio = 'El precio debe ser mayor que 0.';
+        if (!stock || parseInt(stock) <= 0) newErrors.stock = 'El stock debe ser mayor que 0.';
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
+    };
+
     const crearProducto = async () => {
+        if (!validateFields()) return; // Validar antes de enviar
         try {
             const token = localStorage.getItem('authToken');
             const csrfToken = getCSRFToken();
@@ -71,6 +84,7 @@ function Productos() {
             setPrecio('');
             setStock('');
             setImagen(null);
+            setErrors({});
             fetchProductos();
         } catch (error) {
             console.error('Error al crear el producto:', error);
@@ -78,6 +92,7 @@ function Productos() {
     };
 
     const editarProducto = async (id) => {
+        if (!validateFields()) return; // Validar antes de enviar
         try {
             const token = localStorage.getItem('authToken');
             const csrfToken = getCSRFToken();
@@ -105,6 +120,7 @@ function Productos() {
             setPrecio('');
             setStock('');
             setImagen(null);
+            setErrors({});
             fetchProductos();
         } catch (error) {
             console.error('Error al editar el producto:', error);
@@ -138,23 +154,27 @@ function Productos() {
                     value={nombre}
                     onChange={(e) => setNombre(e.target.value)}
                 />
+                {errors.nombre && <span className="error">{errors.nombre}</span>}
                 <textarea
                     placeholder="Descripción"
                     value={descripcion}
                     onChange={(e) => setDescripcion(e.target.value)}
                 />
+                {errors.descripcion && <span className="error">{errors.descripcion}</span>}
                 <input
                     type="number"
                     placeholder="Precio"
                     value={precio}
                     onChange={(e) => setPrecio(e.target.value)}
                 />
+                {errors.precio && <span className="error">{errors.precio}</span>}
                 <input
                     type="number"
                     placeholder="Stock"
                     value={stock}
                     onChange={(e) => setStock(e.target.value)}
                 />
+                {errors.stock && <span className="error">{errors.stock}</span>}
                 <input type="file" onChange={handleImageChange} />
                 {editandoProductoId ? (
                     <button onClick={() => editarProducto(editandoProductoId)}>Actualizar</button>

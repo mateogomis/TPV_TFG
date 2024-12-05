@@ -9,10 +9,20 @@ function Categorias() {
     const [nombre, setNombre] = useState('');
     const [descripcion, setDescripcion] = useState('');
     const [editandoCategoriaId, setEditandoCategoriaId] = useState(null);
+    const [errors, setErrors] = useState({}); // Manejo de errores
 
     useEffect(() => {
         fetchCategorias();
     }, []);
+
+    const validateFields = () => {
+        const newErrors = {};
+        if (!nombre.trim()) newErrors.nombre = 'El nombre es obligatorio.';
+        if (nombre.length > 100) newErrors.nombre = 'El nombre no puede exceder 100 caracteres.';
+        if (!descripcion.trim()) newErrors.descripcion = 'La descripción es obligatoria.';
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
+    };
 
     const fetchCategorias = async () => {
         try {
@@ -29,6 +39,7 @@ function Categorias() {
     };
 
     const crearCategoria = async () => {
+        if (!validateFields()) return; // Validar antes de enviar
         try {
             const token = localStorage.getItem('authToken');
             await axios.post('http://127.0.0.1:8000/api/categorias/', {
@@ -48,6 +59,7 @@ function Categorias() {
     };
 
     const editarCategoria = async (id) => {
+        if (!validateFields()) return; // Validar antes de enviar
         try {
             const token = localStorage.getItem('authToken');
             await axios.put(`http://127.0.0.1:8000/api/categorias/${id}/`, {
@@ -91,16 +103,17 @@ function Categorias() {
                     value={nombre}
                     onChange={(e) => setNombre(e.target.value)}
                 />
+                {errors.nombre && <span className="error">{errors.nombre}</span>}
                 <textarea
                     placeholder="Descripción"
                     value={descripcion}
                     onChange={(e) => setDescripcion(e.target.value)}
                 />
+                {errors.descripcion && <span className="error">{errors.descripcion}</span>}
                 {editandoCategoriaId ? (
                     <button className="create-button" onClick={() => editarCategoria(editandoCategoriaId)}>Actualizar</button>
                 ) : (
                     <button className="create-button" onClick={crearCategoria}>Crear</button>
-
                 )}
             </div>
             <ul className="categoria-list">

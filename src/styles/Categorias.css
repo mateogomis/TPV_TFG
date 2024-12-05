@@ -69,3 +69,71 @@
 .categoria-actions button:hover {
     background-color: #45a049; /* Color verde más oscuro al pasar el mouse */
 }
+.categorias-container {
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: auto;
+}
+
+.categoria-form {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+input, textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button.create-button {
+    padding: 10px;
+    background-color: #00bcd4;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button.create-button:hover {
+    background-color: #0097a7;
+}
+
+.error {
+    color: red;
+    font-size: 12px;
+}
+
+.categoria-list {
+    list-style: none;
+    padding: 0;
+}
+
+.categoria-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.categoria-actions button {
+    margin-left: 10px;
+    padding: 5px 10px;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.categoria-actions button:hover {
+    background-color: #d32f2f;
+}
