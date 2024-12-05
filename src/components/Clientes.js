@@ -9,6 +9,7 @@ function Clientes() {
     const [telefono, setTelefono] = useState('');
     const [direccion, setDireccion] = useState('');
     const [editandoClienteId, setEditandoClienteId] = useState(null);
+    const [errores, setErrores] = useState({});
 
     useEffect(() => {
         fetchClientes();
@@ -26,6 +27,40 @@ function Clientes() {
             setClientes(response.data);
         } catch (error) {
             console.error('Error al obtener los clientes:', error);
+        }
+    };
+
+    // Función para validar el formulario
+    const validarFormulario = () => {
+        let errores = {};
+
+        if (!nombre.trim()) errores.nombre = 'El nombre es obligatorio';
+        if (!correo.trim()) {
+            errores.correo = 'El correo es obligatorio';
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo)) {
+            errores.correo = 'El formato del correo es inválido';
+        }
+        if (!telefono.trim()) {
+            errores.telefono = 'El teléfono es obligatorio';
+        } else if (!/^\d+$/.test(telefono)) {
+            errores.telefono = 'El teléfono debe contener solo números';
+        }
+        if (!direccion.trim()) errores.direccion = 'La dirección es obligatoria';
+
+        return errores;
+    };
+
+    const handleSubmit = () => {
+        const erroresFormulario = validarFormulario();
+        if (Object.keys(erroresFormulario).length > 0) {
+            setErrores(erroresFormulario);
+            return;
+        }
+        setErrores({});
+        if (editandoClienteId) {
+            editarCliente(editandoClienteId);
+        } else {
+            crearCliente();
         }
     };
 
@@ -105,27 +140,35 @@ function Clientes() {
                     value={nombre}
                     onChange={(e) => setNombre(e.target.value)}
                 />
+                {errores.nombre && <p className="error">{errores.nombre}</p>}
+
                 <input
                     type="email"
                     placeholder="Correo"
                     value={correo}
                     onChange={(e) => setCorreo(e.target.value)}
                 />
+                {errores.correo && <p className="error">{errores.correo}</p>}
+
                 <input
                     type="text"
                     placeholder="Teléfono"
                     value={telefono}
                     onChange={(e) => setTelefono(e.target.value)}
                 />
+                {errores.telefono && <p className="error">{errores.telefono}</p>}
+
                 <textarea
                     placeholder="Dirección"
                     value={direccion}
                     onChange={(e) => setDireccion(e.target.value)}
                 />
+                {errores.direccion && <p className="error">{errores.direccion}</p>}
+
                 {editandoClienteId ? (
-                    <button onClick={() => editarCliente(editandoClienteId)}>Actualizar</button>
+                    <button onClick={handleSubmit}>Actualizar</button>
                 ) : (
-                    <button onClick={crearCliente}>Crear</button>
+                    <button onClick={handleSubmit}>Crear</button>
                 )}
             </div>
             <ul className="cliente-list">
