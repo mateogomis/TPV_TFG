@@ -1,3 +1,113 @@
+
+# Proyecto React + Python
+
+Este proyecto utiliza React para el frontend y Python (Django) para el backend. Asegúrate de tener instaladas las dependencias necesarias antes de comenzar.
+
+## Requisitos previos
+
+- Node.js y npm (o Yarn)
+- Python 3.x
+- pip (gestor de paquetes de Python)
+- Virtualenv (opcional, recomendado)
+- Base de datos configurada (por ejemplo, SQLite, PostgreSQL, etc.)
+
+---
+
+## Configuración del Backend (Django)
+
+1. Clonar el repositorio:
+   ```bash
+   git clone <URL_DEL_REPOSITORIO>
+   cd <CARPETA_DEL_BACKEND>
+   ```
+
+2. Crear y activar un entorno virtual:
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # En Windows: venv\Scripts\activate
+   ```
+
+3. Instalar dependencias:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. Configurar la base de datos en `settings.py` (si no usas SQLite).
+
+5. Ejecutar migraciones:
+   ```bash
+   python manage.py makemigrations
+   python manage.py migrate
+   ```
+
+6. Crear un superusuario:
+   ```bash
+   python manage.py createsuperuser
+   ```
+
+7. Ejecutar el servidor de desarrollo:
+   ```bash
+   python manage.py runserver
+   ```
+
+El servidor estará disponible en `http://127.0.0.1:8000/`.
+
+---
+
+## Configuración del Frontend (React)
+
+1. Moverte a la carpeta del frontend:
+   ```bash
+   cd <CARPETA_DEL_FRONTEND>
+   ```
+
+2. Instalar dependencias:
+   ```bash
+   npm install
+   ```
+   O si prefieres Yarn:
+   ```bash
+   yarn install
+   ```
+
+3. Ejecutar el servidor de desarrollo:
+   ```bash
+   npm start
+   ```
+   O con Yarn:
+   ```bash
+   yarn start
+   ```
+
+El servidor estará disponible en `http://localhost:3000/`.
+
+---
+
+## Comandos útiles
+
+### Crear un superusuario (Backend):
+```bash
+python manage.py createsuperuser
+```
+
+### Ejecutar migraciones:
+```bash
+python manage.py makemigrations
+python manage.py migrate
+```
+
+### Instalar dependencias adicionales en el backend:
+```bash
+pip install <nombre_paquete>
+```
+
+### Instalar dependencias adicionales en el frontend:
+```bash
+npm install <nombre_paquete>
+```
+
+-------------------------------------------------------------------------------------------------------
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
